@@ -24,7 +24,7 @@ class GameManager {
     /*I'll move this method into the tracker file soon*/
     found_food = () => {
         return (this.thingsInTheWorld[1].broadCastPosition().x -
-             this.thingsInTheWorld[0].broadCastPosition().x) < 40 
+             this.thingsInTheWorld[0].broadCastPosition().x) < 50 
             ? true : false;
     }
 
@@ -38,9 +38,9 @@ class GameManager {
         if (this.previousTimeStamp !== timestamp) {
             const count = elapsed * .1;
             this.thingsInTheWorld[0].moveFoward(count);
-            
-            this.found_food() && this.removeFromWorld(1);
         }
+
+        this.found_food() && this.removeFromWorld(1);
 
         if (elapsed <= 1000) { 
             this.previousTimeStamp = timestamp
