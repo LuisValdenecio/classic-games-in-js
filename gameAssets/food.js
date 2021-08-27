@@ -6,15 +6,11 @@ class Food {
         this.food;
     }
   
-    maker() {
+    maker = () => {
         this.food = document.createElement('div');
         this.food.setAttribute('id', 'food');
-        return this;
+        return this.food;
     }   
-
-    getHTMLele = () => {
-        return this.food === undefined ? this.maker() : this.food;
-    }
 
     broadCastPosition = () => {
         return { x : 547.942, y : this.getHTMLele().style.top }

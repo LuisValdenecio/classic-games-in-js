@@ -2,31 +2,79 @@ class Cobra {
 
     static NAME = 'cobra';
 
-    constructor() {
+    constructor(direction='right', posX=0, posY=0, width=10, height=20) {
+        this.posX = posX;
+        this.posY = posY;
+        this.width = width;
+        this.height = height;
+        this.direction = direction;
         this.cobra;
-        this.posX = 0;
-        this.posY = 0;
+        this.maker();
+        this.moving = true;
     }
 
-    maker = () => {
+    maker = (class_attr='cobraDefault') => {
         this.cobra = document.createElement('div');
-        this.cobra.setAttribute('id', 'cobra')
-        return this;
+        this.cobra.setAttribute('class', class_attr);
+        this.cobra.style.left = `${this.posX}px`;
+        this.cobra.style.top = `${this.posY}px`;
+        this.cobra.style.width = `${this.width}px`;
+        this.cobra.style.height = `${this.height}px`;
+        return this.cobra;  
     }
 
-    getHTMLele = () => {
-        return this.cobra === undefined ? this.maker() : this.cobra;
+    // this move is agnostic, it depends on the direction proprty
+    move = (velocity) => {
+        switch(this.direction) {
+            case 'ascendingFromBottom' :
+                this.ascendFromBottom(velocity);
+                break;
+            case 'ascendingFromSidesRight' :
+                this.ascendFromRight(velocity);
+                break;
+            case 'down':
+                this.moveDown(velocity);
+                break;
+            default :
+                this.moveFoward(velocity);
+        }
     }
 
     moveFoward = (velocity) => {
-        this.cobra.style.left = velocity*5 + 'px';
-        this.posX = velocity*5;
+        this.moving && 
+        execute([
+            () => this.cobra.style.left = `${this.posX}px`,
+            () => this.posX++
+        ]);
     }
 
-    broadCastPosition = () => {
-        return { x : this.posX, y : this.posY}
+    moveDown = (velocity) => {
+        this.moving && (this.cobra.style.top = `${this.posY++}px`);
     }
 
-    
+    ascendFromBottom = (velocity) => {
+        this.height += 1;
+        this.cobra.style.height = `${this.height}px`;
+        this.height == 10 && (this.direction = 'down');
+    } 
 
+    ascendFromRight = (velocity) => {
+        this.width += 1;
+        this.cobra.style.width = `${this.width}px`;
+        this.width == 10 && (this.direction = 'right');
+    }
+
+    vanish = (velocity) => {
+        if (this.direction == 'right' || this.direction == 'left') {
+            this.width -= 1;
+            this.cobra.style.width = `${this.width}px`; 
+            this.cobra.style.display = this.width == 0 && 'none';
+            this.cobra.style.left = `${velocity + this.posX}px`;
+        } else {
+            this.height -= 1;
+            this.cobra.style.height = `${this.height}px`; 
+            this.cobra.style.display = this.height == 0 && 'none';
+            this.cobra.style.top = `${velocity + this.posY}px`;
+        }
+    }
 }

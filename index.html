@@ -5,44 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-            background-color: black;
-        }
-        #cobra {
-            background-color: yellow;
-            position: absolute;
-            width : 40px;
-            height : 10px;
-            z-index: 2;
-        }
-
-        #food {
-            position : absolute;
-            width : 10px;
-            height : 10px;
-            border-radius: 50%;
-            background-color: #fff;
-            top : 5px;
-            left : 547.942px;
-            z-index: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="globalAssets/style.css">
 </head>
 <body>
+
     <script src="index.js"></script>
     <script src="gameAssets/cobra.js"></script>
     <script src="gameAssets/food.js"></script>
-
+    <script src="util/cobraTrain.js"></script>
+    <script src="util/keyboardEvents.js"></script>
+    <script src="util/messenger.js"></script>
+    <script src="util/util.js"></script>
+   
     <script>
         
-        const cobra = new Cobra().maker();
-        const food = new Food().maker();
-        const gameManager = new GameManager
+        const messenger = new Messenger();
+        const cobraTrain = new CobraTrain(messenger);
+        const gameManager = new GameManager(cobraTrain);
+        const keyboardEvents = new KeyBoardEvents();
+       
+        gameManager.add2world();
 
-        gameManager.add2world([cobra, food]);
+        keyboardEvents.initializer((keyBoardCode) => {
+            switch(keyBoardCode) {
+                case 'ArrowDown':
+                    messenger.eventFired = {eventOn : true, eventName : 'ascendingFromBottom'};
+                    break;
+                /*    
+                case 'ArrowUp':
+                    messenger.eventFired = {eventOn : true, eventName : 'ascendingFromTop'};
+                    break;
+                case 'ArrowLeft':
+                    messenger.eventFired = {eventOn : true, eventName : 'ascendingFromLeft'};
+                    break;*/
+                case 'ArrowRight':
+                    //alert('right');
+                    messenger.eventFired = {eventOn : true, eventName : 'ascendingFromSidesRight'};
+                    break;
+            }
+        });
 
-        window.requestAnimationFrame(gameManager.initializer);
+        window.requestAnimationFrame(gameManager.runGame);
 
     </script>
 </body>
