@@ -56,7 +56,12 @@ class CobraTrain {
                     }
 
                 }  else {
-                    this.extendTheTrain(posX+12, posY-1, ascendingDirection, width, height);
+
+                    if (this.cobras[1].direction == 'top') {
+                        this.extendTheTrain(posX+12, posY+1, ascendingDirection, width, height);
+                    } else {
+                        this.extendTheTrain(posX+12, posY-1, ascendingDirection, width, height);
+                    }
                 } 
             }
 
