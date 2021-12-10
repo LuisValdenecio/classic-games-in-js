@@ -98,8 +98,9 @@ class Cobra {
 
     ascendingFromLeft = (velocity) => {
         this.width += 1;
-        this.cobra.style.left = `${this.width - 3}px`;
+        this.posX -= 2.3;
         this.cobra.style.width = `${this.width}px`;
+        this.cobra.style.left = `${this.posX}px`;
         this.width == 10 && (this.direction = 'left');
     }
 

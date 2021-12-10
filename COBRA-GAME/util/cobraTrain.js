@@ -13,10 +13,24 @@ class CobraTrain {
     }
 
     extendTheTrain = (posX, posY, ascendingDirection, width, height) => {
-        let newCobra = new Cobra(ascendingDirection,posX,posY,width,height);
+        let newCobra;
+
+        if (ascendingDirection == "ascendingFromBottom" || ascendingDirection == "ascendingFromTop" ) {
+            let posX = this.getXCoord(1);
+            newCobra = new Cobra(ascendingDirection,posX,posY,width,height);
+        } else {
+            newCobra = new Cobra(ascendingDirection,posX,posY,width,height);
+        }
+        
         this.world.appendChild(newCobra.cobra);
         this.cobras.push(newCobra);
         this.cobraExtended = true;
+    }
+
+    getXCoord(cobraIndx) {
+        let coordX = this.world.getElementsByClassName('cobraDefault')[cobraIndx].
+            style.left;
+        return + `${coordX.split('px')[0]}`;
     }
 
     startMoving = (velocity) => {
@@ -37,6 +51,12 @@ class CobraTrain {
                 
                 let posX = this.cobras[1].posX;
                 let posY = this.cobras[1].posY;
+                
+                if (this.messenger.eventEmited().eventName == "ascendingFromSidesLeft") {
+                    console.log(posX,posY);
+                }
+                
+                
                 let ascendingDirection =  this.messenger.eventEmited().eventName;
                 let width = (
                     ascendingDirection == "ascendingFromSidesRight"
