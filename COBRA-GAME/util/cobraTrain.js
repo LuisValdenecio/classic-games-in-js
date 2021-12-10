@@ -27,23 +27,18 @@ class CobraTrain {
         this.cobraExtended = true;
     }
 
-    getXCoord(cobraIndx) {
+    getXCoord = (cobraIndx) => {
         let coordX = this.world.getElementsByClassName('cobraDefault')[cobraIndx].
             style.left;
         return + `${coordX.split('px')[0]}`;
     }
 
     startMoving = (velocity) => {
-        // onKeyUp:
-            // 1st: stop moving the 1st block
-            // 2nd: make the last vanish
-            // 3rd: create a third cobra a make it ascend 
         if (this.messenger.eventEmited().eventOn) {
 
             this.cobras[0].vanish(velocity);
             this.cobras[1].moving = false;
         
-
             this.world.querySelectorAll('.cobraDefault')[0].setAttribute('id', 'eliminate_from_dom');
 
             // get prpties of the new cobra
@@ -56,25 +51,19 @@ class CobraTrain {
                     console.log(posX,posY);
                 }
                 
-                
                 let ascendingDirection =  this.messenger.eventEmited().eventName;
-                let width = (
-                    ascendingDirection == "ascendingFromSidesRight"
-                    || ascendingDirection == "ascendingFromSidesLeft"
-                ) ? 0 : 10;
-                let height = (
-                    ascendingDirection == "ascendingFromBottom"
-                    || ascendingDirection == "ascendingFromTop"    
-                    ) ? 0 : 10;
+                let width = (ascendingDirection == "ascendingFromSidesRight" || ascendingDirection == "ascendingFromSidesLeft") 
+                    ? 0 : 10;
+                let height = (ascendingDirection == "ascendingFromBottom" || ascendingDirection == "ascendingFromTop") 
+                    ? 0 : 10;
 
                 if (ascendingDirection == "ascendingFromBottom" || ascendingDirection == "ascendingFromTop") {
 
-                    if (ascendingDirection == "ascendingFromBottom") {
+                    if (ascendingDirection == "ascendingFromBottom") 
                         this.extendTheTrain(posX-1, posY+12, ascendingDirection, width, height);
-                    } else {
+                     else 
                         this.extendTheTrain(posX-1, posY-2, ascendingDirection, width, height);
-                    }
-
+                    
                 }  else {
 
                     if (this.cobras[1].direction == 'top') {
@@ -104,34 +93,27 @@ class CobraTrain {
             }
 
 
-            this.cobras[0].height == 0 &&
-            execute(
-                [
-                    () => this.cobras.splice(0,1), 
-                    () => this.world.removeChild(this.world.querySelector('#eliminate_from_dom')),
-                    () => this.messenger.eventFired = false,
-                    () => this.cobraExtended = false, 
-                    () => this.cobras[0].moving = true,
-                    () => this.cobras[0].direction = nextPosition
-                ]
+            this.cobraWithoutLength(
+                this.cobras[0].width,
+                this.cobras[0].height,
+                nextPosition
             )
-
-            this.cobras[0].width == 0 &&
-            execute(
-                [
-                    () => this.cobras.splice(0,1), 
-                    () => this.world.removeChild(this.world.querySelector('#eliminate_from_dom')),
-                    () => this.messenger.eventFired = false,
-                    () => this.cobraExtended = false, 
-                    () => this.cobras[0].moving = true,
-                    () => this.cobras[0].direction = nextPosition
-                ]
-            )          
         }
             
         this.cobras.forEach((cobra) => {
             cobra.move(velocity);
         });
+    }
+
+    cobraWithoutLength = (cobraWidth, cobraHeight, nextPosition) => {
+        if (cobraWidth == 0 || cobraHeight == 0) {
+            this.cobras.splice(0,1), 
+            this.world.removeChild(this.world.querySelector('#eliminate_from_dom')),
+            this.messenger.eventFired = false,
+            this.cobraExtended = false, 
+            this.cobras[0].moving = true,
+            this.cobras[0].direction = nextPosition
+        }
     }
 
     makeCobraVanish = (cobra, velocity) => {
