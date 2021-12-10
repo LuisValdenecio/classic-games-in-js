@@ -35,11 +35,17 @@ class Cobra {
             case 'ascendingFromTop' :
                 this.ascendFromTop(velocity);
                 break;
+            case 'ascendingFromSidesLeft' :
+                this.ascendingFromLeft(velocity);
+                break;
             case 'top' :
                 this.moveTop(velocity);
                 break;
             case 'down':
                 this.moveDown(velocity);
+                break;
+            case 'left':
+                this.moveLeft(velocity);
                 break;
             default :
                 this.moveFoward(velocity);
@@ -51,6 +57,14 @@ class Cobra {
         execute([
             () => this.cobra.style.left = `${this.posX}px`,
             () => this.posX++
+        ]);
+    }
+
+    moveLeft = (velocity) => {
+        this.moving && 
+        execute([
+            () => this.cobra.style.left = `${this.posX}px`,
+            () => this.posX--
         ]);
     }
 
@@ -80,6 +94,13 @@ class Cobra {
         this.width += 1;
         this.cobra.style.width = `${this.width}px`;
         this.width == 10 && (this.direction = 'right');
+    }
+
+    ascendingFromLeft = (velocity) => {
+        this.width += 1;
+        this.cobra.style.left = `${this.width - 3}px`;
+        this.cobra.style.width = `${this.width}px`;
+        this.width == 10 && (this.direction = 'left');
     }
 
     vanish = (velocity) => {

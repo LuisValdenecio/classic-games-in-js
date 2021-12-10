@@ -6,4 +6,8 @@ class Messenger {
     eventEmited = () => {
        return this.eventFired;
     }
+
+    setter = (event) => {
+        this.eventFired = event;
+    }
 }

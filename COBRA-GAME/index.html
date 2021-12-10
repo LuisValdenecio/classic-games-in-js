@@ -29,17 +29,16 @@
         keyboardEvents.initializer((keyBoardCode) => {
             switch(keyBoardCode) {
                 case 'ArrowDown':
-                    messenger.eventFired = {eventOn : true, eventName : 'ascendingFromBottom'};
+                    messenger.setter({eventOn : true, eventName : 'ascendingFromBottom'});
                     break;
                 case 'ArrowUp':
-                    messenger.eventFired = {eventOn : true, eventName : 'ascendingFromTop'};
-                    break;/*
+                    messenger.setter({eventOn : true, eventName : 'ascendingFromTop'});
+                    break;
                 case 'ArrowLeft':
-                    messenger.eventFired = {eventOn : true, eventName : 'ascendingFromLeft'};
-                    break;*/
+                    messenger.setter({eventOn : true, eventName : 'ascendingFromSidesLeft'});
+                    break;
                 case 'ArrowRight':
-                    //alert('right');
-                    messenger.eventFired = {eventOn : true, eventName : 'ascendingFromSidesRight'};
+                    messenger.setter({eventOn : true, eventName : 'ascendingFromSidesRight'});
                     break;
             }
         });

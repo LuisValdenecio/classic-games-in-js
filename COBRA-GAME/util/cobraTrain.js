@@ -59,8 +59,10 @@ class CobraTrain {
 
                     if (this.cobras[1].direction == 'top') {
                         this.extendTheTrain(posX+12, posY+1, ascendingDirection, width, height);
-                    } else {
+                    } else if (this.cobras[1].direction == 'down' && ascendingDirection == 'ascendingFromSidesRight') {
                         this.extendTheTrain(posX+12, posY-1, ascendingDirection, width, height);
+                    } else if (this.cobras[1].direction == 'down' && ascendingDirection == 'ascendingFromSidesLeft') {
+                        this.extendTheTrain(posX+10, posY-1, ascendingDirection, width, height);
                     }
                 } 
             }
@@ -74,6 +76,11 @@ class CobraTrain {
                 case 'ascendingFromTop':
                     nextPosition = 'top';
                     break;
+                case 'ascendingFromSidesLeft':
+                    nextPosition = 'left';
+                    break;
+                default:
+                    nextPosition = 'right';
             }
 
 
@@ -85,7 +92,7 @@ class CobraTrain {
                     () => this.messenger.eventFired = false,
                     () => this.cobraExtended = false, 
                     () => this.cobras[0].moving = true,
-                    () => this.cobras[0].direction = 'right'
+                    () => this.cobras[0].direction = nextPosition
                 ]
             )
 
