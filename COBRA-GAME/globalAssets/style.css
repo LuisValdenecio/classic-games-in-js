@@ -21,7 +21,6 @@
     width : 10px;
     height : 10px;
     border: solid 1px white;    
-    background-color:white;
-    left : 547.942px;
-    z-index: 1;
+    background-color: green;
+    border-radius: 50%;
 }
