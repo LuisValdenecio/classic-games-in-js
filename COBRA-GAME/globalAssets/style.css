@@ -20,7 +20,6 @@
     position : absolute;
     width : 10px;
     height : 10px;
-    border: solid 1px white;    
-    background-color: green;
+    background-color: lightgreen;
     border-radius: 50%;
 }

@@ -4,6 +4,7 @@ class Food {
         this.food;
         this.posX;
         this.posY;
+        this.world = document.body;
     }
   
     maker = () => {
@@ -16,12 +17,18 @@ class Food {
     }   
 
     randomPositioner = () => {
-        this.posX = Math.random() * 100;
-        this.posY = Math.random() * 100;
+        this.posX = Math.random(0, 1) * 400;
+        this.posY = Math.random(0, 1) * 400;
     }
 
     broadCastPosition = () => {
-        return { x : 547.942, y : this.getHTMLele().style.top }
+        return { posX : this.posX, posY : this.posY }
+    }
+
+    eliminateFood = () => {
+        this.world.removeChild(this.food);
+        let newCobra = this.maker();
+        this.world.appendChild(newCobra);
     }
 
 }
