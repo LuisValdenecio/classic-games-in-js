@@ -9,14 +9,26 @@
 </head>
 <body>
 
+    <script src="util/points.js"></script>
     <script src="index.js"></script>
     <script src="gameAssets/cobra.js"></script>
     <script src="gameAssets/food.js"></script>
+    <script src="util/tracker.js"></script>
     <script src="util/cobraTrain.js"></script>
     <script src="util/keyboardEvents.js"></script>
     <script src="util/messenger.js"></script>
     <script src="util/util.js"></script>
    
+    <!-- statistics and controls of the game -->
+    <div id="table">
+        <div id="top-part">
+            <span id="score">Scores: </span><span class="bold-data">0</span>
+        </div>
+        <div id="bottom-part">
+            <span id="record">Record: </span><span class="bold-data">0</span>
+        </div>
+    </div>
+
     <script>
         
         const messenger = new Messenger();

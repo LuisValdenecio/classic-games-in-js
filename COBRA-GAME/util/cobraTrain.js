@@ -47,10 +47,6 @@ class CobraTrain {
                 let posX = this.cobras[1].posX;
                 let posY = this.cobras[1].posY;
                 
-                if (this.messenger.eventEmited().eventName == "ascendingFromSidesLeft") {
-                    console.log(posX,posY);
-                }
-                
                 let ascendingDirection =  this.messenger.eventEmited().eventName;
                 let width = (ascendingDirection == "ascendingFromSidesRight" || ascendingDirection == "ascendingFromSidesLeft") 
                     ? 0 : 10;
