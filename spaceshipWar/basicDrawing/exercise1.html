@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>This is an HTML canvas!!!</title>
+        <style>
+            body {
+                text-align : center;
+                font-family: sans-serif;
+            }
+
+            canvas {
+                background-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>This is an HTML canvas!!</h1>
+        <canvas id="asteroids" width="400" height="400"></canvas>
+        <script>
+            let canvas = document.getElementById('asteroids');
+            let context = canvas.getContext('2d');
+            context.strokeStyle = 'lightgray';
+            context.lineWidth = 5;
+            context.fillStyle = 'gray';
+            context.rect(75,50,canvas.width - 150, canvas.height - 100);
+            context.stroke();
+            context.fill();
+
+            // writing text on the shape
+            context.strokeStyle = 'lightgray';
+            context.lineWidth = .9;
+            context.textAlign = 'center';
+            context.font = '34px Arial';
+            context.strokeText('2d Drawing', canvas.width / 2, 100);
+
+            // cute message at the foot of the canvas
+            let text = 'canvas is awesome!!!';
+            context.font = '24px Arial';
+            context.fillStyle = 'white';
+            context.strokeStyle = 'red';
+            context.fillText(text, canvas.width/2, 330);
+            context.strokeText(text, canvas.width/2, 330);
+            context
+
+            // some other shape
+            context.strokeStyle = '#FFFFFF';
+            context.lineWidth = 2;
+            context.beginPath();
+            context.arc(200, 140, 20, 0, Math.PI * 2);
+            context.moveTo(200, 160);
+            context.lineTo(200, 220);
+            context.moveTo(180, 300);
+            context.lineTo(185, 260);
+            context.lineTo(200, 220);
+            context.lineTo(215, 260);
+            context.lineTo(220, 300);
+            context.moveTo(240, 130);
+            context.lineTo(225, 170);
+            context.lineTo(200, 170);
+            context.lineTo(175, 180);
+            context.lineTo(170, 220);
+            context.stroke();
+
+        </script>
+    </body>
+</html>
