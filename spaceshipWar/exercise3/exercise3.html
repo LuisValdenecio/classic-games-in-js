@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="drawing.js"></script>
+    <title>Designing pacman</title>
+</head>
+<body>
+    <h1>Practicing designing pacman</h1>
+    <canvas id="pacmania" width="400" height="400"></canvas>
+    <script>
+        let canvas = document.getElementById('pacmania');
+        let context = canvas.getContext('2d');
+
+        draw_grid(context, 15, 45, 'yellow', 'white');
+
+        // drawing pacman
+        let min_radius = 5;
+        let max_radius = 50;
+        do {
+            let x = context.canvas.width * Math.random();
+            let y = context.canvas.height * Math.random();
+            let radius = min_radius + (max_radius - min_radius) * Math.
+            random();
+            draw_pacman(context, x, y, radius, Math.random());
+        } while(Math.random() < 0.9)
+
+        /*
+        context.beginPath();
+        context.arc(200,200,150,0.2*Math.PI, 1.8*Math.PI);
+        context.lineTo(200,200);
+        context.fillStyle = 'yellow';
+        context.fill();
+        */
+
+    </script>
+</body>
+</html>
